@@ -1,0 +1,39 @@
+{
+	"variables": {
+		"iso-url": "http://ftp.sunet.se/pub/linux/distributions/Debian/debian/dists/Debian8.0/main/installer-i386/current/images/netboot/mini.iso",
+		"iso-checksum": "66add8a40c8b899597b3838838c1f226",
+		"update": "false",
+		"ssh_username": "root",
+		"ssh_password": "flaskhals1!",
+		"install_vagrant_key": "true",
+		"headless": "",
+
+	}
+	"builders": [
+		{
+		"type": "Docker",
+		"image": "debian",
+		"export_path": "adminer.tar",
+		"run_command": "wget http://www.adminer.org/latest.php"
+	}
+	{	
+		"vm-name": "debian8",
+		"type": "virtualbox-iso",
+		"http_directory": "http",
+		"iso_url": "{{ user `iso_url` }}",
+		"iso_checksum": "{{ user `iso_checksum` }}",
+		"iso_checksum_type": "md5",
+		"guest_os_type": "debian_64",
+		"guest_additions_path": "VBoxGuestAdditions_{{.version}}.iso",
+		"virtualbox_version_file": ".vbox_version",
+		"ssh_username": "{{ user `ssh_username` }}",
+		"ssh_password": "{{ user `ssh_password` }}",
+		"ssh_wait_timeout": "10000s",
+		"headless": "{{ user `headless` }}", 
+
+	} 
+	]
+
+}
+
+
