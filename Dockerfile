@@ -14,5 +14,6 @@ ADD default /etc/nginx/sites-available/default
 
 EXPOSE 80 
 
-
+CMD ["service php5-fpm start"]
+CMD ["service nginx start"]
 
