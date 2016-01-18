@@ -11,9 +11,10 @@ RUN mv latest.php /var/www/index.php
 RUN sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/' /etc/php5/fpm/php.ini
 # Edit /etc/nginx/sites-available/default
 ADD default /etc/nginx/sites-available/default
+RUN service php5-fpm start
+RUN service nginx start
 
 EXPOSE 80 
 
-CMD ["service php5-fpm start"]
-CMD ["service nginx start"]
+
 
